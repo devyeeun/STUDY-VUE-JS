@@ -1,0 +1,26 @@
+<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+<div id="app"></div>
+
+<script>
+  const data = {
+    message: 10,
+  };
+
+  function render(sth) {
+    const div = document.querySelector("#app");
+    div.innerHTML = sth;
+  }
+
+  const app = new Proxy(data, {
+    get() {
+      console.log("값 접근!");
+    },
+    set(target, prop, newValue) {
+      console.log("값 갱신!");
+      target[prop] = newValue;
+      render(newValue);
+    },
+  });
+</script>
+
+<!-- 뷰3에서는 프록시라고 하는 API를 이용해서 화면을 변경한다. -->
